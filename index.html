@@ -114,10 +114,8 @@ function initialize() {
 				.load( 'Colin_AR.obj', function ( group ) {
 					mesh0 = group.children[0];
 					mesh0.material.side = THREE.DoubleSide;
-					mesh0.position.y = 0.2;
-					mesh0.position.z = 3.5;
-					mesh0.rotation.x = Math.PI / -2;
-					mesh0.scale.set(2, 2, 2);
+					mesh0.position.y = 0;
+					mesh0.scale.set(0.05,0.05,0.05);
 					markerRoot1.add(mesh0);
 				}, onProgress, onError );
       }
