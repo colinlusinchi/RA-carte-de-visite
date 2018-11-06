@@ -111,7 +111,7 @@ function initialize() {
 			new THREE.OBJLoader()
 				.setMaterials( materials )
 				.setPath( 'model/' )
-				.load( 'Colin_AR.obj', function ( group ) {
+				.load( 'Colin_AR.OBJ', function ( group ) {
 					mesh0 = group.children[0];
 					mesh0.material.side = THREE.DoubleSide;
 					mesh0.position.y = 0;
@@ -131,7 +131,7 @@ function update()
 	//	arToolkitContext.update( arToolkitSource.domElement );
 
 	if ( markerRoot1.visible )
-		mesh0.rotation.y += 0.01;
+		mesh0.rotation.y += 0.005;
 	// update artoolkit on every frame
 	if ( arToolkitSource.ready !== false )
 		arToolkitContext.update( arToolkitSource.domElement );
