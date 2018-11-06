@@ -111,7 +111,7 @@ function initialize() {
 			new THREE.OBJLoader()
 				.setMaterials( materials )
 				.setPath( 'model/' )
-				.load( 'Colin_AR.OBJ', function ( group ) {
+				.load( 'Colin_AR.obj', function ( group ) {
 					mesh0 = group.children[0];
 					mesh0.material.side = THREE.DoubleSide;
 					mesh0.position.y = 0;
