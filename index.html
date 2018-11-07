@@ -95,6 +95,63 @@ function initialize() {
 	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type: 'pattern', patternUrl: "marker/hiro.patt",
 	})
+	
+	
+renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+	
+	let loader = new THREE.TextureLoader();
+		
+	let sceneGroup = new THREE.Group();
+	markerRoot1.add(sceneGroup);
+	
+	//let texture = loader.load("images/color-grid.png");
+	// repeat texture
+	//texture.wrapS = THREE.RepeatWrapping;
+	//texture.wrapT = THREE.RepeatWrapping;
+	//texture.repeat.set(8,1);
+	
+	shadowMesh = new THREE.Mesh( 
+		new THREE.TorusKnotGeometry(0.5, 0.2, 128, 16), // new THREE.SphereBufferGeometry(1, 32, 32), 
+		new THREE.MeshLambertMaterial({ map: texture })
+	);
+	shadowMesh.position.y = 1;
+	shadowMesh.castShadow = true;
+	shadowMesh.receiveShadow = true;
+	sceneGroup.add( shadowMesh );
+	
+	let floorGeometry = new THREE.PlaneGeometry( 20,20 );
+	let floorMaterial = new THREE.ShadowMaterial();
+	floorMaterial.opacity = 0.3;
+	let floorMesh = new THREE.Mesh( floorGeometry, floorMaterial );
+	floorMesh.rotation.x = -Math.PI/2;
+	floorMesh.receiveShadow = true;
+	sceneGroup.add( floorMesh );
+	
+	let light = new THREE.PointLight( 0xffffff, 1, 100 );
+	light.position.set( 0,4,0 ); // default; light shining from top
+	light.castShadow = true;
+	sceneGroup.add( light );
+	
+	let lightSphere = new THREE.Mesh(
+		new THREE.SphereGeometry(0.1),
+		new THREE.MeshBasicMaterial({
+			color: 0xffffff,
+			transparent: true,
+			opacity: 0.8
+		})
+	);
+	lightSphere.position.copy( light.position );
+	sceneGroup.add( lightSphere );
+	
+	let ambientLight = new THREE.AmbientLight( 0x666666 );
+	sceneGroup.add( ambientLight );
+	// let helper = new THREE.CameraHelper( light.shadow.camera );
+	// sceneGroup.add( helper );
+}
+	
+	
+	
   // let geometry1 = new THREE.PlaneBufferGeometry(1,1, 4,4);
 	// let loader = new THREE.TextureLoader();
 	// //let texture = loader.load( 'models/Tex_Eagle.png', render );
